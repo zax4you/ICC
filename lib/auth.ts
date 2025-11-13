@@ -11,17 +11,16 @@ export async function createSupabaseServer() {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        // Read cookie (for auth)
         get(name: string) {
           return cookieStore.get(name)?.value;
         },
-        // These are required by the type, but in server actions and
-        // server components they won't really be used.
-        set() {
-          // no-op for now
+        set(name: string, value: string, options: any) {
+          // Supabase uses this to persist the session
+          cookieStore.set({ name, value, ...options });
         },
-        remove() {
-          // no-op for now
+        remove(name: string, options: any) {
+          // Clear the cookie by setting empty value
+          cookieStore.set({ name, value: "", ...options });
         },
       },
     }
