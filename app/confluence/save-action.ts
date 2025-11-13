@@ -18,7 +18,9 @@ export async function saveConfluence({
   lower_tf: number;
   total: number;
 }) {
-  const supabase = createSupabaseServer();
+  // ✅ Wait for the Supabase server client
+  const supabase = await createSupabaseServer();
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
