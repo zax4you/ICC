@@ -3,7 +3,6 @@
 import Input from "@/components/Input";
 import Toggle from "@/components/Toggle";
 import Button from "@/components/Button";
-import { ICCSetup } from "../page";
 import { saveICCSetup } from "./save-action";
 
 export default function ContinuationStep({
